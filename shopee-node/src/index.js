@@ -9,5 +9,7 @@ const item2 = await createItem("Hotweels 3", 40.99, 1)
 await cartSevice.addItem(cart,item1);
 await cartSevice.addItem(cart,item2);
 
+await cartSevice.displayCart(cart);
+
 console.log("Shopee Subtota: ")
 await cartSevice.calcItem(cart);

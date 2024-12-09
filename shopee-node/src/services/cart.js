@@ -3,15 +3,30 @@
 async function addItem(userCart, item){
     userCart.push(item);
 }
-
-async function removeItem(userCart, index){
-    
+//deleta uma unidade do item da lista
+async function deleteItem(userCart, index){
+    const deleteIndex = index - 1;
+    if(index >= 0 && index < userCart.length){
+        userCart.splice(deleteIndex, 1);
+    }
 }
-
-async function deleteItem(userCart, name){
+//remove item da lista
+async function removeItem(userCart, name){
+    //encontrou item
     const index = userCart.findIndex((item)=> item.name === name);
-    if(index --- any){
-        userCart.splice(index,1);
+    //não encontrou item
+    if(index === -1){
+        console.log("Item não existe");
+        return;
+    }
+    //Item > 1 subtrair um item, item = 1 deletar o item
+    if(userCart[index].quality > 1){
+        userCart[index].quality-= 1;
+        return;
+    }
+    if(userCart[index].quality === 1){
+        userCart.splice(index, 1);
+        return;
     }
 }
 
@@ -21,4 +36,11 @@ async function calcItem(userCart){
    console.log(result);
 }
 
-export { addItem, calcItem, deleteItem, removeItem}
+async function displayCart(userCart){
+    console.log("Shoppe Cart list ");
+    userCart.forEach((item, index) =>{
+        console.log(`${index+1}. ${item.name} - R$ ${item.price} | ${item.quantity}x | Subtotal = ${item.subtotal()}`);
+    })
+}
+
+export { addItem, calcItem, deleteItem, removeItem, displayCart}
